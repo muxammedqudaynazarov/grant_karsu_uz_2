@@ -87,7 +87,7 @@
 </div>
 
 <!-- Asosiy Login Karta -->
-<div class="relative z-10 w-full max-w-[420px] px-6 py-10 mx-auto">
+<div class="relative z-10 w-full max-w-xl px-6 py-10 mx-auto">
     <div
         class="bg-white/80 backdrop-blur-xl border border-white/40 shadow-2xl shadow-indigo-500/10 rounded-3xl p-8 sm:p-10">
         <div class="text-center mb-8">
