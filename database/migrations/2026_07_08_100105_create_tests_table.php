@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->enum('status', ['0', '1', '2', '3', '4'])->default('0');
             $table->timestamp('finished_at')->nullable();
             $table->double('score')->default(0);
+            $table->integer('downloads')->default(1);
+            $table->integer('checks')->default(1);
             $table->timestamps();
         });
     }

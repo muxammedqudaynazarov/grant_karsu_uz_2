@@ -14,10 +14,20 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserBookController extends Controller
 {
+    public function check($uuid)
+    {
+        $test = Test::where('uuid', $uuid)->first();
+        $limit = null;
+        if ($test) {
+            $test->increment('checks');
+            $limit = Limit::where('min', '<=', $test->score)->where('max', '>=', $test->score)->first();
+        }
+        return view('home.check', compact(['test', 'limit']));
+    }
+
     public function download($uuid)
     {
         $test = Test::where('uuid', $uuid)->firstOrFail();
-        if ($test->user_id !== auth()->id()) abort(403);
         $checkUrl = route('certificates.check', $test->uuid);
         $qrcode = QrCode::size(170)->format('svg')
             ->color(30, 41, 59)->margin(1)
@@ -36,6 +46,7 @@ class UserBookController extends Controller
             'karsu_logo' => $karsuLogo,
             'test' => $test,
         ];
+        $test->increment('downloads');
         $pdf = Pdf::loadView('home.certificate', $data)->setPaper('a4', 'landscape');
         //return $pdf->download('sertifikat-' . auth()->user()->username . '.pdf');
         return $pdf->stream();

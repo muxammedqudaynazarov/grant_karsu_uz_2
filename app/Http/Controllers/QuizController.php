@@ -2,63 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
+use App\Models\Attempt;
+use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuizController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function finish(Request $request, Test $test)
     {
-        //
-    }
+        if ($test->user_id !== auth()->id() || $test->status !== '2') {
+            return redirect()->route('tests.index')->with('error', 'Test yakunlangan yoki ruxsat yo‘q.');
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $qCount = 50;
+        $maxPoints = 20;
+        $perPoint = $maxPoints / $qCount;
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        DB::transaction(function () use ($test, $perPoint) {
+            $attempts = Attempt::where('test_id', $test->id)->get();
+            $correctCount = 0;
+            foreach ($attempts as $attempt) {
+                if ($attempt->answer_id) {
+                    $isCorrect = Answer::where('id', $attempt->answer_id)->where('correct', '1')->exists();
+                    if ($isCorrect) $correctCount++;
+                }
+            }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+            $totalPoint = $correctCount * $perPoint;
+            $test->update([
+                'status' => '3',
+                'finished_at' => now(),
+                'score' => $totalPoint
+            ]);
+        });
+        return redirect()->route('tests.index')->with('success', 'Test muvaffaqiyatli yakunlandi!');
     }
 }

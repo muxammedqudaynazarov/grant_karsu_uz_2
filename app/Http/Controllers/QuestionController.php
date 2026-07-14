@@ -108,13 +108,13 @@ class QuestionController extends Controller
 
             DB::commit();
             $successMsg = "Jami {$totalQuestions} ta savol muvaffaqiyatli yuklandi va tillar bo‘yicha birlashtirildi.";
-            if (!empty($allErrors)) {
+            /*if (!empty($allErrors)) {
                 $errorHtml = "<br><br><b>Ba’zi e’tiborsizliklar (qoldirib ketilgan qatorlar) kuzatildi:</b><br>";
                 foreach ($allErrors as $lang => $errs) {
                     $errorHtml .= "<b>[{$lang}] faylida:</b><br>" . implode('<br>', array_slice($errs, 0, 5)) . "<br>";
                 }
                 return redirect()->back()->with('warning', $successMsg . $errorHtml);
-            }
+            }*/
             return redirect()->back()->with('success', $successMsg);
 
         } catch (\Exception $e) {

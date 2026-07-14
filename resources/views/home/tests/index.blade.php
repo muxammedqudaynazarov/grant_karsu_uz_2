@@ -78,7 +78,7 @@
                                     <i class="bi bi-check2-circle me-1"></i> {{ __('main.Book approval') }}
                                 </button>
                             </form>
-                        @elseif($test->status == '1')
+                        @elseif($test->status == '1' || $test->status == '2')
                             <a href="{{ route('tests.show', $test->id) }}" class="btn btn-danger btn-sm mb-1"
                                style="font-weight: normal">
                                 <i class="bi bi-play me-1"></i> {{ __('main.Start') }}

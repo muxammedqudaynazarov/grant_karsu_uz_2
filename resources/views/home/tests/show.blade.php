@@ -162,7 +162,7 @@
     <div class="content-wrapper bg-white">
         <section class="content">
             <div class="container-fluid">
-                <form id="examForm" action="#" method="POST">
+                <form id="examForm" action="{{ route('tests.finish', $test->id) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-9">
@@ -239,7 +239,7 @@
                                 </div>
 
                                 <button type="button"
-                                        class="btn btn-success btn-block btn-lg shadow-sm font-weight-bold rounded-lg py-3"
+                                        class="btn btn-success btn-block btn-lg shadow-sm font-weight-bold rounded-lg py-3 w-100"
                                         onclick="finishExam()">
                                     <i class="fas fa-paper-plane mr-2"></i> {{ __('main.Conclusion') }}
                                 </button>
@@ -364,7 +364,7 @@
                 } else {
                     Swal.fire({
                         title: '{{ __('main.Warning!') }}',
-                        text: `{{ __('main.Switching to another window is prohibited. Your remaining chance') }}: ${MAX_VIOLATIONS - violationCount}`,
+                        text: `{{ __('main.Switching to another window is prohibited. Your remaining chance') }} ${MAX_VIOLATIONS - violationCount}`,
                         icon: 'warning'
                     });
                 }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserBookController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,7 @@ Route::prefix('home')->middleware(['auth'])->group(function () {
     Route::post('/tests/answer/upload', [TestController::class, 'uploadAnswer'])->name('tests.answer.upload');
     Route::resource('/userbooks', UserBookController::class)->only(['update']);
     Route::get('/certificate/{uuid}/download', [UserBookController::class, 'download'])->name('certificate.download');
-    Route::get('/certificate/check/{uuid}', [UserBookController::class, 'download'])->name('certificates.check');
-    Route::resource('/questions', QuestionController::class);
+    Route::get('/certificate/check/{uuid}', [UserBookController::class, 'check'])->name('certificates.check');
+    Route::post('/tests/{test}/finish', [QuizController::class, 'finish'])->name('tests.finish');
+    Route::resource('/hemis/enter/questions', QuestionController::class);
 });
