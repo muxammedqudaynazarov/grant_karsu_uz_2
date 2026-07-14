@@ -1,0 +1,17 @@
+{
+    "kanit": {
+        "normal": "kanit_normal_987f1b958707ae898a13d9e37c3bdfe3"
+    },
+    "saira stencil": {
+        "normal": "saira_stencil_normal_4c277a8e13365fac6bceca443036018e",
+        "bold": "D:\\OSPanel\\home\\grantkarsu\\storage\\fonts\/saira_stencil_bold_35327208c8b984a0092f8a5e9006dc31",
+        "500": "D:\\OSPanel\\home\\grantkarsu\\storage\\fonts\/saira_stencil_500_31b45e856e9e3689619a8b0ea9ce54f1"
+    },
+    "dm sans": {
+        "normal": "D:\\OSPanel\\home\\grantkarsu\\storage\\fonts\/dm_sans_normal_ad07ce7d0a5cb2f02e9fe213e19943a4",
+        "bold": "dm_sans_bold_c5bfdfd99b55b3fc807d62b38940e479"
+    },
+    "bookman old style": {
+        "normal": "bookman_old_style_normal_a84a73da8e1c0bda25ce36fa185c59ee"
+    }
+}
