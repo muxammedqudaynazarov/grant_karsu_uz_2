@@ -313,13 +313,13 @@ class TestSeeder extends Seeder
         ]);
         Limit::create([
             'name' => 'Badiiy adabiyot: 4-6 ta (10.00 ball)',
-            'min' => 10,
+            'min' => 8,
             'max' => 13.99,
         ]);
         Limit::create([
             'name' => 'Badiiy adabiyot: 0 ta (0.00 ball)',
             'min' => 0,
-            'max' => 9.99,
+            'max' => 7.99,
         ]);
     }
 }
