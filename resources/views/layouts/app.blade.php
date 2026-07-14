@@ -229,5 +229,84 @@
 </script>
 
 @yield('script')
+<style>
+    /* Tranzitsiya (Silliq ochilishi uchun) */
+    .admin-sidebar, .admin-main {
+        transition: all 0.3s ease-in-out !important;
+    }
+
+    /* MOBIL EKRANLAR UCHUN (Telefonda chapdan chiqib keladi) */
+    @media (max-width: 991.98px) {
+        .admin-sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            z-index: 1040;
+            transform: translateX(-100%); /* Boshlang'ich holatda yashirin */
+        }
+        /* JS orqali 'sidebar-open' klassi qo'shilganda: */
+        .admin-shell.sidebar-open .admin-sidebar {
+            transform: translateX(0); /* Ekranga chiqish */
+        }
+
+        /* Qora fon (Backdrop) */
+        .sidebar-backdrop {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1030;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .admin-shell.sidebar-open .sidebar-backdrop {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    /* KATTA EKRANLAR UCHUN (Kompyuterda sidebar ni yopish/ochish) */
+    @media (min-width: 992px) {
+        /* JS orqali 'sidebar-collapsed' klassi qo'shilganda: */
+        .admin-shell.sidebar-collapsed .admin-sidebar {
+            margin-left: -260px; /* Sidebar eniga qarab o'zgartirishingiz mumkin (masalan -250px) */
+        }
+        .admin-shell.sidebar-collapsed .admin-main {
+            margin-left: 0 !important; /* Asosiy qismni to'liq ekranga yoyish */
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleBtn = document.querySelector('.sidebar-toggle');
+        const adminShell = document.querySelector('.admin-shell');
+        const backdrop = document.querySelector('.sidebar-backdrop');
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation(); // Boshqa JS fayllardagi xatoliklarni to'xtatadi
+
+                // Ekran o'lchamini tekshiramiz
+                if (window.innerWidth < 992) {
+                    // Mobil uchun
+                    adminShell.classList.toggle('sidebar-open');
+                } else {
+                    // Kompyuter uchun
+                    adminShell.classList.toggle('sidebar-collapsed');
+                }
+            });
+        }
+
+        // Qora fon bosilganda (Faqat mobilda)
+        if (backdrop) {
+            backdrop.addEventListener('click', function () {
+                adminShell.classList.remove('sidebar-open');
+            });
+        }
+    });
+</script>
 </body>
 </html>
