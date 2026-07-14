@@ -170,7 +170,11 @@
                             <span class="profile-name d-none d-sm-inline ms-2">{{ auth()->user()->name }}</span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
-                            <li><a class="dropdown-item text-danger" href="#">{{ __('main.Exit') }}</a></li>
+                            <li>
+                                <a class="dropdown-item text-danger" href="{{ route('logout') }}">
+                                    {{ __('main.Exit') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -245,6 +249,7 @@
             z-index: 1040;
             transform: translateX(-100%); /* Boshlang'ich holatda yashirin */
         }
+
         /* JS orqali 'sidebar-open' klassi qo'shilganda: */
         .admin-shell.sidebar-open .admin-sidebar {
             transform: translateX(0); /* Ekranga chiqish */
@@ -253,13 +258,17 @@
         /* Qora fon (Backdrop) */
         .sidebar-backdrop {
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1030;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease-in-out;
         }
+
         .admin-shell.sidebar-open .sidebar-backdrop {
             opacity: 1;
             visibility: visible;
@@ -272,6 +281,7 @@
         .admin-shell.sidebar-collapsed .admin-sidebar {
             margin-left: -260px; /* Sidebar eniga qarab o'zgartirishingiz mumkin (masalan -250px) */
         }
+
         .admin-shell.sidebar-collapsed .admin-main {
             margin-left: 0 !important; /* Asosiy qismni to'liq ekranga yoyish */
         }

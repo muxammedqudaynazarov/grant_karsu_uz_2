@@ -24,4 +24,8 @@ Route::prefix('home')->middleware(['auth'])->group(function () {
     Route::get('/certificate/check/{uuid}', [UserBookController::class, 'check'])->name('certificates.check');
     Route::post('/tests/{test}/finish', [QuizController::class, 'finish'])->name('tests.finish');
     Route::resource('/hemis/enter/questions', QuestionController::class)->only(['create', 'store']);
+    Route::get('/logout', function () {
+        Auth::logout();
+        return redirect('/login');
+    })->name('logout');
 });
