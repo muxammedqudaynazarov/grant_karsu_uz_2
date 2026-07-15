@@ -35,6 +35,7 @@
                         <td class="align-middle">
                             @if($test->status == '3')
                                 {{ number_format($test->score, 2) }}
+                                ({{ number_format($test->score, 2) }} / )
                             @else
                                 --
                             @endif
