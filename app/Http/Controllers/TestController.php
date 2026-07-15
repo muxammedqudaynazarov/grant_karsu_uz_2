@@ -23,7 +23,7 @@ class TestController extends Controller
             ]);
         }
         if (Carbon::now()->gt($test->finished_at)) {
-            return redirect()->route('results.show', $test->id)->with('error', 'Test vaqti yakunlangan.');
+            return redirect()->route('tests.index', $test->id)->with('error', 'Test vaqti yakunlangan.');
         }
         $attempts = Attempt::with(['question', 'question.answers'])
             ->where('test_id', $test->id)->orderBy('pos')->get();
