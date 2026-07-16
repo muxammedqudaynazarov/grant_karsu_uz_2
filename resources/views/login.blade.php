@@ -148,13 +148,13 @@
             </div>
         </form>
 
-        <div class="mt-8 text-center pt-6 border-t border-slate-100">
+        {{--<div class="mt-8 text-center pt-6 border-t border-slate-100">
             <a href="{{ route('hemis') }}"
                class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-primary-600 transition-colors">
                 <i class="ti ti-shield-lock text-lg"></i>
                 HEMIS Student orqali kirish
             </a>
-        </div>
+        </div>--}}
     </div>
 </div>
 
