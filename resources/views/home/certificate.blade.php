@@ -76,7 +76,7 @@
 
         .text-content {
             position: absolute;
-            top: 55%;
+            top: 60%;
             left: 10%;
             width: 80%;
             font-size: 14px;
