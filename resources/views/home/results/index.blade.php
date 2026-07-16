@@ -6,59 +6,55 @@
             <table class="table text-center">
                 <thead>
                 <tr>
-                    <th style="width: 10%">#</th>
+                    <th>#</th>
                     <th>{{ __('main.Student name') }}</th>
+                    <th>{{ __('main.Faculty') }}</th>
+                    <th>{{ __('main.Course of Study') }}</th>
+                    <th>{{ __('main.Level') }}</th>
+                    <th>{{ __('main.Group') }}</th>
                     <th>{{ __('main.Result') }}</th>
                     <th>{{ __('main.Time') }}</th>
                     <th>{{ __('main.Status') }}</th>
-                    <th style="width: 15%"></th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 @forelse($tests as $test)
-                    <tr>
+                    <tr class="small">
                         <td class="align-middle">
                             <code>
                                 #{{ $test->id }}
                             </code>
                         </td>
-                        <td class="align-middle">
-                            <div class="fw-bold">
-                                {{ $test->user->data['full_name'] }}
-                            </div>
-                            <div class="text-muted small">
-                                {{ $test->user->data['specialty']['code'] }} –
-                                {{ $test->user->data['specialty']['name'] }},
-                                {{ $test->user->data['level']['name'] }}
-                            </div>
+                        <td class="align-middle fw-bold">
+                            {{ $test->user->data['full_name'] }}
                         </td>
                         <td class="align-middle">
-                            {{ number_format($test->score, 2) }}
-                            <small class="text-danger">({{ ($test->score / 0.4) }} / 50)</small>
+                            {{ $test->user->data['faculty']['name'] }}
+                        </td>
+                        <td class="align-middle">
+                            {{ $test->user->data['specialty']['code'] }} –
+                            {{ $test->user->data['specialty']['name'] }}
+                        </td>
+                        <td class="align-middle">
+                            {{ $test->user->data['level']['name'] }}
+                        </td>
+                        <td class="align-middle">
+                            {{ $test->user->data['group']['name'] }}
+                        </td>
+                        <td class="align-middle">
+                            <div class="badge bg-primary">
+                                {{ number_format($test->score, 2) }}
+                                <small class="text-dark">({{ ($test->score / 0.4) }} / 50)</small>
+                            </div>
                         </td>
                         <td class="align-middle">
                             <code>
                                 {{ $test->finished_at->format('d.m.Y H:i:s') }}
                             </code>
                         </td>
-                        <td class="small align-middle">
-                            @if($test->status == '0')
-                                <div class="badge bg-dark">
-                                    {{ __('main.Choosing books') }}
-                                </div>
-                            @elseif($test->status == '1')
-                                <div class="badge bg-danger">
-                                    {{ __('main.Test is ready') }}
-                                </div>
-                            @elseif($test->status == '2')
-                                <div class="badge bg-primary">
-                                    {{ __('main.In process') }}
-                                </div>
-                            @elseif($test->status == '3')
-                                <div class="badge bg-success">
-                                    {{ __('main.Finished') }}
-                                </div>
-                            @endif
+                        <td class="align-middle">
+                            {{ __('main.Finished') }}
                         </td>
                         <td class="align-middle">
                             <a href="{{ route('certificate.download', $test->uuid) }}"
