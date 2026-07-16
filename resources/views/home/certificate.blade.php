@@ -55,7 +55,7 @@
 
         .student-name {
             position: absolute;
-            top: 45%;
+            top: 48%;
             left: 0;
             width: 100%;
             font-size: 28pt;
@@ -66,7 +66,7 @@
 
         .student-name-sm {
             position: absolute;
-            top: 49%;
+            top: 52%;
             left: 0;
             width: 100%;
             font-size: 15pt;

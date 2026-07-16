@@ -82,5 +82,6 @@
                 </tbody>
             </table>
         </div>
+        {{ $tests->links() }}
     </div>
 @endsection
