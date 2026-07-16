@@ -29,27 +29,32 @@ class UserBookController extends Controller
     {
         $test = Test::where('uuid', $uuid)->firstOrFail();
         $checkUrl = route('certificates.check', $test->uuid);
-        $qrcode = QrCode::size(170)->format('svg')
-            ->color(30, 41, 59)->margin(1)
+
+        // Generate SVG and encode it to Base64
+        $qrcode = QrCode::size(135)->format('svg')
+            ->color(30, 41, 59)->margin(1) // Changed margin from 1 to 2
             ->generate($checkUrl);
+
+        // Base64 encoding the SVG string
         $qrcodeBase64 = 'data:image/svg+xml;base64,' . base64_encode($qrcode);
-        $logoPath = public_path('assets/images/karsu_logo.png');
-        $karsuLogo = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
+
         $limit = Limit::where('min', '<=', $test->score)->where('max', '>=', $test->score)->first();
+
         $data = [
             'name' => $test->user->name,
-            'test_name' => $limit->name,
+            'test_name' => $limit->name ?? 'Kitobxonlik madaniyati',
             'score' => $test->score,
             'date' => $test->created_at->format('d.m.Y'),
             'uuid' => $test->uuid,
             'qrcode' => $qrcodeBase64,
-            'karsu_logo' => $karsuLogo,
             'test' => $test,
         ];
+
         $test->increment('downloads');
+
         $pdf = Pdf::loadView('home.certificate', $data)->setPaper('a4', 'landscape');
-        return $pdf->download('sertifikat-' . auth()->user()->username . '.pdf');
-        //return $pdf->stream();
+        //return $pdf->download('sertifikat-' . auth()->user()->username . '.pdf');
+        return $pdf->stream();
     }
 
     public function update(Request $request, Test $userbook)
