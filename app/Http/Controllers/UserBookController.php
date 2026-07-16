@@ -10,6 +10,7 @@ use App\Models\UserBook;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class UserBookController extends Controller
@@ -29,17 +30,9 @@ class UserBookController extends Controller
     {
         $test = Test::where('uuid', $uuid)->firstOrFail();
         $checkUrl = route('certificates.check', $test->uuid);
-
-        // Generate SVG and encode it to Base64
-        $qrcode = QrCode::size(135)->format('svg')
-            ->color(30, 41, 59)->margin(1) // Changed margin from 1 to 2
-            ->generate($checkUrl);
-
-        // Base64 encoding the SVG string
+        $qrcode = QrCode::size(135)->format('svg')->color(30, 41, 59)->margin(1)->generate($checkUrl);
         $qrcodeBase64 = 'data:image/svg+xml;base64,' . base64_encode($qrcode);
-
         $limit = Limit::where('min', '<=', $test->score)->where('max', '>=', $test->score)->first();
-
         $data = [
             'name' => $test->user->name,
             'test_name' => $limit->name ?? 'Kitobxonlik madaniyati',
@@ -49,11 +42,11 @@ class UserBookController extends Controller
             'qrcode' => $qrcodeBase64,
             'test' => $test,
         ];
-
         $test->increment('downloads');
-
         $pdf = Pdf::loadView('home.certificate', $data)->setPaper('a4', 'landscape');
-        return $pdf->download('sertifikat_' . auth()->user()->username . '_' . time() . '.pdf');
+        $name = str_replace(' ', '_', Str::ascii($test->user->data['full_name'] ?? $test->user->name));
+        $filename = preg_replace('/[^A-Za-z0-9_]/', '', $name);
+        return $pdf->download('sertifikat_' . $filename . '_' . time() . '.pdf');
         //return $pdf->stream();
     }
 
