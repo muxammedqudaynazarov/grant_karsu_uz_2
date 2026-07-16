@@ -105,7 +105,8 @@
 
                     <td data-label="{{ __('main.Result') }}" class="fw-bold text-primary">
                         @if($test->status == '3')
-                            {{ number_format($test->score, 2) }} ball
+                            {{ number_format($test->score, 2) }}
+                            <small class="text-danger">({{ ($test->score / 0.4) }} / 50)</small>
                         @else
                             --
                         @endif

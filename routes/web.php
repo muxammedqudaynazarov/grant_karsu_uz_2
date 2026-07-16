@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HemisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -27,6 +28,7 @@ Route::prefix('home')->middleware(['auth'])->group(function () {
     Route::get('/certificate/check/{uuid}', [UserBookController::class, 'check'])->name('certificates.check');
     Route::post('/tests/{test}/finish', [QuizController::class, 'finish'])->name('tests.finish');
     Route::resource('/hemis/enter/questions', QuestionController::class)->only(['create', 'store']);
+    Route::resource('/hemis/show/students/results', DepartmentController::class)->only(['index']);
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');
