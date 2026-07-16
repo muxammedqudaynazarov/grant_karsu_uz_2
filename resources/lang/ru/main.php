@@ -55,5 +55,6 @@ return [
     'Faculty' => 'Факультет',
     'Course of Study' => 'Направление образования',
     'Group' => 'Группа',
-    'Level' => 'Курс'
+    'Level' => 'Курс',
+    'Correct answers' => 'Правильные ответы',
 ];

@@ -15,7 +15,11 @@
                     <th>{{ __('main.Result') }}</th>
                     <th>{{ __('main.Time') }}</th>
                     <th>{{ __('main.Status') }}</th>
-                    <th></th>
+                    <th>
+                        <a href="{{ route('tests.export') }}" class="badge bg-success">
+                            EXCEL
+                        </a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,20 +31,20 @@
                             </code>
                         </td>
                         <td class="align-middle fw-bold">
-                            {{ $test->user->data['full_name'] }}
+                            {{ $test->user->data['full_name'] ?? '-' }}
                         </td>
                         <td class="align-middle">
-                            {{ $test->user->data['faculty']['name'] }}
+                            {{ $test->user->data['faculty']['name'] ?? '-' }}
                         </td>
                         <td class="align-middle">
-                            {{ $test->user->data['specialty']['code'] }} –
-                            {{ $test->user->data['specialty']['name'] }}
+                            {{ $test->user->data['specialty']['code'] ?? '-' }} –
+                            {{ $test->user->data['specialty']['name'] ?? '-' }}
                         </td>
                         <td class="align-middle">
-                            {{ $test->user->data['level']['name'] }}
+                            {{ $test->user->data['level']['name'] ?? '-' }}
                         </td>
                         <td class="align-middle">
-                            {{ $test->user->data['group']['name'] }}
+                            {{ $test->user->data['group']['name'] ?? '-' }}
                         </td>
                         <td class="align-middle">
                             <div class="badge bg-primary">

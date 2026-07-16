@@ -55,5 +55,6 @@ return [
     'Faculty' => 'Fakulteti',
     'Course of Study' => 'Ta’lim yo‘nalishi',
     'Group' => 'Guruhi',
-    'Level' => 'Ta’lim kursi'
+    'Level' => 'Ta’lim kursi',
+    'Correct answers' => 'To‘g‘ri javoblar',
 ];

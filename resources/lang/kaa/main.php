@@ -55,5 +55,6 @@ return [
     'Faculty' => 'Fakulteti',
     'Course of Study' => 'Tálim baǵdarı',
     'Group' => 'Toparı',
-    'Level' => 'Tálim kursı'
+    'Level' => 'Tálim kursı',
+    'Correct answers' => 'Durıs juwaplar',
 ];

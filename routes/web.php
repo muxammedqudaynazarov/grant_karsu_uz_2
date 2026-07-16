@@ -29,6 +29,7 @@ Route::prefix('home')->middleware(['auth'])->group(function () {
     Route::post('/tests/{test}/finish', [QuizController::class, 'finish'])->name('tests.finish');
     Route::resource('/hemis/enter/questions', QuestionController::class)->only(['create', 'store']);
     Route::resource('/hemis/show/students/results', DepartmentController::class)->only(['index']);
+    Route::get('/hemis/show/students/results/export', [DepartmentController::class, 'export'])->name('tests.export');
     Route::get('/logout', function () {
         Auth::logout();
         return redirect('/login');
