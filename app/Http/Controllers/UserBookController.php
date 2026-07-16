@@ -46,7 +46,7 @@ class UserBookController extends Controller
         $pdf = Pdf::loadView('home.certificate', $data)->setPaper('a4', 'landscape');
         $name = str_replace(' ', '_', Str::ascii($test->user->data['full_name'] ?? $test->user->name));
         $filename = preg_replace('/[^A-Za-z0-9_]/', '', $name);
-        return $pdf->download('sertifikat_' . $filename . '_' . time() . '.pdf');
+        return $pdf->download('sertifikat-' . $filename . '-' . time() . '.pdf');
         //return $pdf->stream();
     }
 
