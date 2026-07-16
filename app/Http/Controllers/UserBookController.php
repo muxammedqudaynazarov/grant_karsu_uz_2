@@ -37,7 +37,7 @@ class UserBookController extends Controller
         $karsuLogo = 'data:image/png;base64,' . base64_encode(file_get_contents($logoPath));
         $limit = Limit::where('min', '<=', $test->score)->where('max', '>=', $test->score)->first();
         $data = [
-            'name' => auth()->user()->name,
+            'name' => $test->user->name,
             'test_name' => $limit->name,
             'score' => $test->score,
             'date' => $test->created_at->format('d.m.Y'),
