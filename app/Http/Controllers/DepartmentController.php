@@ -11,7 +11,7 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $tests = Test::where('status', '3')->paginate(30);
+        $tests = Test::where('status', '3')->orderBy('finished_at', 'desc')->paginate(30);
         return view('home.results.index', compact(['tests']));
     }
 
