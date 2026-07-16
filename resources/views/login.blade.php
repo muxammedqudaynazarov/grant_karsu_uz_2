@@ -148,15 +148,13 @@
             </div>
         </form>
 
-        <!-- Admin sahifasiga o'tish -->
         {{--<div class="mt-8 text-center pt-6 border-t border-slate-100">
-            <a href="?start=1"
+            <a href="{{ route('hemis') }}"
                class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-primary-600 transition-colors">
                 <i class="ti ti-shield-lock text-lg"></i>
-                Admin sahifasiga o'tish
+                HEMIS Student orqali kirish
             </a>
-        </div>
---}}
+        </div>--}}
     </div>
 </div>
 

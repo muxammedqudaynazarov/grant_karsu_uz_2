@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HemisController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionController;
@@ -14,6 +15,7 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'index']);
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::get('/hemis', [HemisController::class, 'student'])->name('hemis');
 Route::prefix('home')->middleware(['auth'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/lang/{locale}', [HomeController::class, 'lang'])->name('lang');
