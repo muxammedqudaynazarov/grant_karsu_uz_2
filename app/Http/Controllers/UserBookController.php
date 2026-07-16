@@ -53,8 +53,8 @@ class UserBookController extends Controller
         $test->increment('downloads');
 
         $pdf = Pdf::loadView('home.certificate', $data)->setPaper('a4', 'landscape');
-        //return $pdf->download('sertifikat-' . auth()->user()->username . '.pdf');
-        return $pdf->stream();
+        return $pdf->download('sertifikat_' . auth()->user()->username . '_' . time() . '.pdf');
+        //return $pdf->stream();
     }
 
     public function update(Request $request, Test $userbook)
